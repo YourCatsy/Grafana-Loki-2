@@ -22,6 +22,8 @@ services:
     environment:
       - GF_SECURITY_ADMIN_USER=admin
       - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - ./provisioning:/etc/grafana/provisioning
     depends_on:
       - loki
 
