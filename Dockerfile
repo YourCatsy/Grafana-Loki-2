@@ -9,6 +9,9 @@ COPY go.mod go.sum ./
 
 # Download all dependencies
 RUN go mod download
+RUN go mod tidy
+RUN go mod verify
+
 
 # Copy the source code
 COPY . .
@@ -26,8 +29,11 @@ WORKDIR /app
 COPY --from=builder /app/webapp /app/
 COPY public /app/public
 
+# Create directory for logs
+RUN mkdir -p /var/log
+
 # Expose the application port
-EXPOSE 8080
+EXPOSE 3000
 
 # Start the application
 CMD ["./webapp"]
